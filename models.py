@@ -26,7 +26,11 @@ class Album(models.Model):
         return self.album_name
 
     def delete_media(self):
-        os.remove(path=MEDIA_ROOT+'/'+str(self.album_logo))
+    file_path = os.path.join(MEDIA_ROOT, str(self.album_logo))  
+    if os.path.exists(file_path):  
+        os.remove(file_path)  
+    else:
+        print(f"File {file_path} not found. Unable to delete.")
 
 
 
